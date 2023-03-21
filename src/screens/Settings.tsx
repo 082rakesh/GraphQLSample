@@ -1,11 +1,14 @@
 import * as React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import Button from '../components/Button';
 
 function SettingsScreen({navigation}) {
   return (
     <View style={styles.settingViewStyle}>
-      <Text>Settings!</Text>
-      {/* <Button title="Go to Home" onPress={() => navigation.navigate('Home')} /> */}
+      <Button
+        title="Branch Locator"
+        onPress={() => navigation.navigate('Branch Locator')}
+      />
     </View>
   );
 }

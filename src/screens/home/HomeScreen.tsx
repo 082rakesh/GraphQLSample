@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {Text, FlatList, Pressable, StyleSheet} from 'react-native';
 import {useQuery} from '@apollo/client';
-import {LAUNCH_LIST} from '../graphql/queries.graphql';
+import {LAUNCH_LIST} from '../../graphql/queries.graphql';
 import {
   LaunchList,
   LaunchListVariables,
-} from '../graphql/__generated__/LaunchList';
+} from '../../graphql/__generated__/LaunchList';
 
 const Item = ({launch, onPress}) => {
   const {details} = launch;
@@ -26,10 +26,7 @@ export default ({navigation}) => {
       },
     },
   );
-  console.log('data is: ', data);
-
   const onPressAction = () => {
-    console.log('inside onPressAction');
     navigation.navigate('HomeDetails');
   };
 
@@ -65,5 +62,3 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 });
-
-// export default HomeScreen;

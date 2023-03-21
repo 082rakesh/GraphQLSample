@@ -1,14 +1,9 @@
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 
+// HTTPLink also can be used in case of setting up a more configuration.
+
 // const httpLink = new HttpLink({
 //   uri: 'https://spacex-production.up.railway.app/',
-// });
-
-// export const client: ApolloClient = new ApolloClient({
-//   uri: 'https://spacex-production.up.railway.app/',
-//   cache: new InMemoryCache({
-//     addTypename: false,
-//   }),
 // });
 
 const cache = new InMemoryCache();

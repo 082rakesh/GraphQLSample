@@ -2,9 +2,9 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SettingsScreen from '../screens/Settings';
-import HomeScreen from '../screens/Home';
-import DetailsScreen from '../screens/Details';
+import SettingsScreen from '../screens/settings/SettingsScreen';
+import HomeScreen from '../screens/home/HomeScreen';
+import DetailsScreen from '../screens/settings/Details';
 
 const Tab = createBottomTabNavigator();
 

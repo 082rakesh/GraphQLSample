@@ -6,7 +6,7 @@
  */
 
 import * as React from 'react';
-import MainNavigation from './src/navigation/Navigator';
+import MainNavigation from './src/navigator/Navigator';
 import {ApolloProvider} from '@apollo/client';
 import {client} from './src/graphql/graphql';
 

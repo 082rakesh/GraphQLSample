@@ -1,57 +1,69 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {Text, FlatList, Pressable, StyleSheet} from 'react-native';
+import {useQuery} from '@apollo/client';
+import {LAUNCH_LIST} from '../graphql/queries.graphql';
+import {
+  LaunchList,
+  LaunchListVariables,
+} from '../graphql/__generated__/LaunchList';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-];
+const Item = ({launch, onPress}) => {
+  const {details} = launch;
 
-type ItemProps = {title: string};
-
-const Item = ({title}: ItemProps) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
-function HomeScreen({navigation}) {
   return (
-    <View style={styles.homeViewStyle}>
-      <FlatList
-        data={DATA}
-        renderItem={({item}) => <Item title={item.title} />}
-        keyExtractor={item => item.id}
-      />
-    </View>
+    <Pressable style={styles.item} onPress={onPress}>
+      <Text style={styles.header}>{details}</Text>
+    </Pressable>
   );
-}
+};
+
+export default ({navigation}) => {
+  const {data, loading} = useQuery<LaunchList, LaunchListVariables>(
+    LAUNCH_LIST,
+    {
+      variables: {
+        limit: 5,
+      },
+    },
+  );
+  console.log('data is: ', data);
+
+  const onPressAction = () => {
+    console.log('inside onPressAction');
+    navigation.navigate('HomeDetails');
+  };
+
+  if (loading) {
+    return <Text>Loading ...</Text>;
+  }
+  return (
+    <FlatList
+      data={data?.launches}
+      renderItem={({item}) => <Item launch={item} onPress={onPressAction} />}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
-  homeViewStyle: {
+  centered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   item: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc',
   },
-  title: {
-    fontSize: 32,
+  header: {
+    fontWeight: 'bold',
+  },
+  subheader: {
+    paddingTop: 10,
   },
 });
 
-export default HomeScreen;
+// export default HomeScreen;

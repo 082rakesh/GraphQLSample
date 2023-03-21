@@ -6,10 +6,16 @@
  */
 
 import * as React from 'react';
-import MainNavigation from './src/Navigation/Navigator';
+import MainNavigation from './src/navigation/Navigator';
+import {ApolloProvider} from '@apollo/client';
+import {client} from './graphql';
 
 function App() {
-  return <MainNavigation />;
+  return (
+    <ApolloProvider client={client}>
+      <MainNavigation />
+    </ApolloProvider>
+  );
 }
 
 export default App;
